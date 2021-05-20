@@ -1,13 +1,13 @@
 import pokebase as pb
 import random
-import tkinter
+# import tkinter
 print("Lancement du pokédex chargement des pokémons")
-#Fenetre 
-window = tkinter.Tk()
-window.mainloop 
-window.title('PokéQuizz')
-window.geometry("300x300")
-window.iconbitmap("logo.ico")
+# #Fenetre 
+# window = tkinter.Tk()
+# window.mainloop 
+# window.title('PokéQuizz')
+# window.geometry("300x300")
+# window.iconbitmap("logo.ico")
 
 
 
@@ -107,7 +107,22 @@ def randomPoke():
     n = random.randint(0,4)
     Stat(n)
     
+def Filtre():
+    print("Fonction de tri de pokémon via leur 1er lettre")
+    letter = input("Rentrer la 1er lettre du pokémon ")[0]
+    result = []
+    for j in range(0,4,1):
+        if pokelist[j].name[0] == letter:
+            result.append(j)
+    
+    k = len(result)
 
+    print("Il y a " + str(k) + " pokémons commencant par la lettre " + letter)
+
+    while k > 0:
+        Stat(result[k-1])
+        k = k-1
+       
 
 # fin des fonctions
 
@@ -115,10 +130,26 @@ def randomPoke():
 
 print("Pokémon chargés en attente d'instruction") 
 
-Allpok()
-Quizz()
-pokeName()
-randomPoke()
+#interface 
+
+panel = 0
+while panel != 5:
+    print('Bienvenue sur notre Pokedex interactif pour enfant !')
+    print('Vous avez 5 commandes possibles qui sont les suivantes ')
+    print("1-Voir l'ensemble des pokémons ")
+    print('2-Petit quizz ')
+    print('4-Générer un pokémon aléatoirement')
+    print('5- Terminer la partie')
+    panel = int(input("commande entre 1 et 4 ?"))
+    if panel == 1:
+        Allpok()
+    if panel == 2:
+        Quizz()
+    if panel == 3:
+        pokeName()
+    if panel == 4:
+        randomPoke()
+print ("Merci d'avoir jouer !")
 
 
 # compléter class pokémon avec toutes les données qu'on a besoin --
