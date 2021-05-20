@@ -1,6 +1,15 @@
 import pokebase as pb
-
+import random
+from tkinter import *
 print("Lancement du pokédex chargement des pokémons")
+"""#Fenetre 
+window = Tk()
+window.mainloop 
+window.title('PokéQuizz')
+window.geometry("300x300")
+window.iconbitmap("logo.ico")"""
+
+
 
 class Pokemon:
     def __init__(self, id):
@@ -10,11 +19,13 @@ class Pokemon:
         self.atk = pb.pokemon(id).stats[1].base_stat
         self.hp = pb.pokemon(id).stats[0].base_stat
         self.vit = pb.pokemon(id).stats[5].base_stat
+    def typePoke:
+        
    
 # boucle création pokémon api vers objet
 # le premier pokémon à pour indez 0 mais son id dans l'api est 1
 pokelist = []
-for i in range(1,5,1):
+for i in range(1,100,1):
     onepok = Pokemon(i)
     pokelist.append(onepok)
 
@@ -75,7 +86,17 @@ def Stat(id):
         print("Ce pokémon est de type : " + str(pokelist[id].type))
         print("Les stats d'attack de ce pokémon est de : "+ str(pokelist[id].atk))
         print("Les stats de vie de ce pokémon est de : "+ str(pokelist[id].hp))
-        print("La vitesse de ce pokémon est de : "+ str(pokelist[id].vit))
+        print("La vitesse de ce pokémon est de : "+ str(pokelist[id].vit))  
+
+def pokeName():
+    id = int(input('Rentre un numéro de pokémon '))
+    Stat(id)
+
+def randomPoke():
+    n = random.randint(0,4)
+    Stat(n)
+    
+
 
 # fin des fonctions
 
@@ -85,9 +106,11 @@ print("Pokémon chargés en attente d'instruction")
 
 Allpok()
 Quizz()
+pokeName()
+randomPoke()
 
 
-# compléter class pokémon avec toutes les données qu'on a besoin
+# compléter class pokémon avec toutes les données qu'on a besoin --
 # Faire une fonction hors class de tri genre affcihé que les pokémons commencant par un c (reduce ou filter) possibilité d'evoluer que ce soit l'utilistateur qui rentre la 1er lettre
 # Faire une méthode afficher le nombre de pokémon par types (possibilité dico clé type et valuer le nombre)
 # Faire une fonction qui affiche le pokemon en donnant l'index
