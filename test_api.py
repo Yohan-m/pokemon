@@ -1,13 +1,13 @@
 import pokebase as pb
 import random
-from tkinter import *
+import tkinter
 print("Lancement du pokédex chargement des pokémons")
-"""#Fenetre 
-window = Tk()
+#Fenetre 
+window = tkinter.Tk()
 window.mainloop 
 window.title('PokéQuizz')
 window.geometry("300x300")
-window.iconbitmap("logo.ico")"""
+window.iconbitmap("logo.ico")
 
 
 
@@ -19,13 +19,13 @@ class Pokemon:
         self.atk = pb.pokemon(id).stats[1].base_stat
         self.hp = pb.pokemon(id).stats[0].base_stat
         self.vit = pb.pokemon(id).stats[5].base_stat
-    def typePoke:
+    
         
    
 # boucle création pokémon api vers objet
 # le premier pokémon à pour indez 0 mais son id dans l'api est 1
 pokelist = []
-for i in range(1,100,1):
+for i in range(1,5,1):
     onepok = Pokemon(i)
     pokelist.append(onepok)
 
@@ -38,7 +38,18 @@ for i in range(1,100,1):
 #Quiz nom pokémon
 def Quizz():
     print("Bienvenu dans le Quizz pokémon appuyer a tout moment sur 'c' pour quitter le jeu")
-    id = int(input('Rentrez un numéro de pokémon ! '))-1
+    id = input('Rentrez un numéro de pokémon ! ')
+    
+    testInt = id.isnumeric()
+
+    while testInt != True or int(id) > 5:
+        print("Veuillez entrer un chiffre entre 1 et 5")
+        id = input('Rentrez un numéro de pokémon ! ')
+        testInt = id.isnumeric()
+        
+
+    id = int(id)-1
+
 
     mot = pokelist[id].name
     lettre = mot[:1]
