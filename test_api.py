@@ -1,15 +1,12 @@
 import pokebase as pb
 import random
-# import tkinter
+import matplotlib.pyplot as plt
+import numpy as np
+import pylab
+
+
+
 print("Lancement du pokédex chargement des pokémons")
-# #Fenetre 
-# window = tkinter.Tk()
-# window.mainloop 
-# window.title('PokéQuizz')
-# window.geometry("300x300")
-# window.iconbitmap("logo.ico")
-
-
 
 class Pokemon:
     def __init__(self, id):
@@ -19,19 +16,38 @@ class Pokemon:
         self.atk = pb.pokemon(id).stats[1].base_stat
         self.hp = pb.pokemon(id).stats[0].base_stat
         self.vit = pb.pokemon(id).stats[5].base_stat
-        
+        self.img = pb.pokemon_form(id).sprites.front_default
     def pokeType(self):
 
         typeTable =[]
         typeNum=[]
-        
+
         for i in range(1,18,1):
             typeTable.append(pb.type_(i).name)
             typeNum.append(len(pb.type_(i).pokemon))
+
+        print("Rentrez 1 pour un affichage dictionnaire")
+        print("Rentrez 2 pour un affichage graphique")
+
+        choix= int(input("Rentrez 1 ou 2 : "))
+
+        if choix == 1:
+            dictionnaire = dict(zip(typeTable,typeNum))
+            print(dictionnaire)
+        if choix == 2:
+
+            x = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
+            height = typeNum
+            barName = typeTable
+            width = 0.5
+            pylab.xticks(x, barName, rotation=40)
+            plt.bar(x, height, width, color="r" )
+            plt.ylabel('Nombre de Pokémon©')
+            plt.title('Nombre de Pokémon© par type')
+            plt.show()
         
-        dictionnaire = dict(zip(typeTable,typeNum))
-        print(dictionnaire)
-        
+
+
         
 
     
@@ -40,13 +56,10 @@ class Pokemon:
 # boucle création pokémon api vers objet
 # le premier pokémon à pour indez 0 mais son id dans l'api est 1
 pokelist = []
-for i in range(1,5,1):
+for i in range(1,1,1):
     onepok = Pokemon(i)
     pokelist.append(onepok)
 
-# b = Pokemon(1)
-# print(b.name)
-# print(b.hp)
 
 #Toutes les fonctions doivent être écrites en dessous
 #Test Int
@@ -117,8 +130,8 @@ def pokeStat():
     id = input('Rentre un numéro de pokémon ')
     testIntFunc(id)
     id = int(j)
-    Stat(id,1)
-
+    Stat(id,1)                                                                      
+    
 def randomPoke():
     n = random.randint(0,4)
     print(n)
@@ -139,7 +152,7 @@ def Filtre():
     while k > 0:
         Stat(result[k-1],1)
         k = k-1
-       
+
 
 # fin des fonctions
 
@@ -157,17 +170,18 @@ while panel != 7:
     print('3- Pokémon par numéro ! ')
     print('4- Générer un pokémon aléatoirement')
     print('5- Filtrer les pokémons')
-    print('6- Afficher le nombres de pokémons par types\n')
+    print('6- Afficher le nombres de pokémons par types')
+    print('0- Pokégraph')
     print('7- Terminer la partie\n')
-    panel = input("commande entre 1 et 6 ?\n")
+    panel = input("commande entre 1 et 7 ?\n")
 
     errorInt = panel.isnumeric()
     while errorInt == True and int(panel) > 7 or errorInt != True:
         print("Veuillez entrez un chiffre entre 1 et 6 ou 7 pour quitter")
-        panel = input("commande entre 1 et 6 ?")
+        panel = input("commande entre 1 et 7 ?")
         errorInt = panel.isnumeric()
     panel=int(panel)
-    
+
     if panel == 1:
         Allpok()
     if panel == 2:
